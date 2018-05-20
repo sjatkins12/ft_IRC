@@ -6,7 +6,7 @@
 #    By: satkins <satkins@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/25 14:05:53 by satkins           #+#    #+#              #
-#    Updated: 2018/05/14 11:56:01 by satkins          ###   ########.fr        #
+#    Updated: 2018/05/19 18:27:30 by satkins          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,19 +28,40 @@ CFLAGS = -Wall -Wextra -Werror -c
 ################################################################################
 
 SRC_SERVER =  \
+			accept_connection \
 			server \
-			inter_proc_comm \
-			master_process \
-			worker_sockets \
-			workers
-SRC_FTP_FUNC = \
-			ftp_functions \
-			nlst
+			select_loop \
+			client_message \
+			server_pass \
+			nickname \
+			send_channel_msg \
+			close_connection \
+			color
+
 SRC_CLIENT = \
-			client
+			connect_to_server \
+			command_loop \
+			prompt \
+			recv_channel_msg \
+			move_to_prompt
+SRC_COMMANDS = \
+			nick \
+			pass \
+			join \
+			color
+
 SRC_UTILS = \
-			dtp_connection \
-			fd_set_utils
+			fd_set_utils \
+			socket_utils \
+			pwd_terminal \
+			termcap_utils \
+			my_putchar \
+			setup_termcaps \
+			color
+
+SRC_CLASSES = \
+			client \
+			channel
 
 
 ################################################################################
@@ -48,16 +69,19 @@ SRC_UTILS = \
 ################################################################################
 
 SRCDIR_SERVER = src/server/
-SRCDIR_FTP_FUNC = ftp_functions/
 SRCDIR_CLIENT = src/client/
+SRCDIR_COMMANDS = commands/
 SRCDIR_UTILS = src/utils/
+
+SRCDIR_CLASSES = src/classes/
 
 SERVERSRC = $(patsubst %, %.o, $(addprefix $(SRCDIR_SERVER), $(SRC_SERVER)))
 SERVERSRC += $(patsubst %, %.o, $(addprefix $(SRCDIR_UTILS), $(SRC_UTILS)))
-SERVERSRC += $(patsubst %, %.o, $(addprefix $(SRCDIR_SERVER), \
-	$(addprefix $(SRCDIR_FTP_FUNC), $(SRC_FTP_FUNC))))
+SERVERSRC += $(patsubst %, %.o, $(addprefix $(SRCDIR_CLASSES), $(SRC_CLASSES)))
 
 CLIENTSRC = $(patsubst %, %.o, $(addprefix $(SRCDIR_CLIENT), $(SRC_CLIENT)))
+CLIENTSRC += $(patsubst %, %.o, $(addprefix $(SRCDIR_CLIENT), \
+	$(addprefix $(SRCDIR_COMMANDS), $(SRC_COMMANDS))))
 CLIENTSRC += $(patsubst %, %.o, $(addprefix $(SRCDIR_UTILS), $(SRC_UTILS)))
 
 ################################################################################
@@ -67,6 +91,10 @@ CLIENTSRC += $(patsubst %, %.o, $(addprefix $(SRCDIR_UTILS), $(SRC_UTILS)))
 INCLUDES = \
 		-I libft/inc \
 		-I inc
+
+LIB_LINK = \
+	-l ftprintf \
+	-l termcap
 
 ################################################################################
 # COLOR                                                                        #
@@ -86,10 +114,9 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(SERVERSRC) $(CLIENTSRC)
 	@ echo "$(YELLOW)Compiling programs$(RES)"
-	$(CC) $(FLAGS) -L $(LIBPATH) -lftprintf $(INCLUDES) $(SERVERSRC) -o $(SERVER)
-	$(CC) $(FLAGS) -L $(LIBPATH) -lftprintf $(INCLUDES) $(CLIENTSRC) -o $(CLIENT)
+	$(CC) $(FLAGS) -L $(LIBPATH) $(LIB_LINK) $(INCLUDES) $(SERVERSRC) -o $(SERVER)
+	$(CC) $(FLAGS) -L $(LIBPATH) $(LIB_LINK) $(INCLUDES) $(CLIENTSRC) -o $(CLIENT)
 	@echo "$(GREEN)Binaries Compiled$(RES)"
-
 
 $(LIBFT):
 	@make -C $(LIBPATH)
