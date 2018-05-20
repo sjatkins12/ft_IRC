@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 10:27:12 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 19:58:16 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 00:50:11 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			read_channel(int server_socket)
 		save_cur();
 		delete_current_line();
 		print_user(header);
-		ft_printf("\033[38;2;%d;%d;%d;m%s\n\033[0m", header.color.red, header.color.green, header.color.blue, msg);
+		ft_printf("\033[38;2;%d;%d;%dm%s\n\033[0m", header.color.red, header.color.green, header.color.blue, msg);
 		print_prompt(g_prompt);
 		restore_cur();
 	}
@@ -46,7 +46,7 @@ int			read_channel(int server_socket)
 	{
 		delete_current_line();
 		print_user(header);		
-		ft_printf("\033[38;2;%d;%d;%d;m%s\033[0m", header.color.red, header.color.green, header.color.blue, msg);
+		ft_printf("\033[38;2;%d;%d;%dm%s\033[0m", header.color.red, header.color.green, header.color.blue, msg);
 		move_down_line();
 		print_prompt(g_prompt);
 	}

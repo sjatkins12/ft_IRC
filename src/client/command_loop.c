@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:30:52 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 16:21:40 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 00:14:46 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_client_funcs	g_client_commands[] = {
 				{"/nick ", &send_nick},
 				{"/join ", &join},
 				{"/color ", &color},
+				{"/who\0", &who},
 				{NULL, NULL}
 };
 

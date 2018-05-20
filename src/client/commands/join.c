@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 21:40:46 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/17 18:37:01 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 00:38:32 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	recv_response(int server_socket, char *chan_name)
 	ft_bzero(buff, sizeof(buff));
 	if (recv(server_socket, buff, 1024, 0) == -1)
 		return (EXIT_FAILURE);
-	if (ft_strequ(buff, "JOIN SUCCESS"))
+	if (ft_strequ(buff, "JOIN"))
 	{
 		ft_printf("\033[1;34mJoined %s successfully\n\033[0m", chan_name);
 		ft_bzero(g_prompt.channel, sizeof(g_prompt.channel));

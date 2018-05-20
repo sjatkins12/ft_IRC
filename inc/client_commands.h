@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 21:32:37 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 16:07:26 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 00:15:07 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ typedef struct		s_client_funcs
 int					send_nick(int server_socket, char *nick);
 int					join(int server_socket, char *param);
 int					color(int server_socket, char *param);
+int					who(int server_socket, char *param);
 
 #endif

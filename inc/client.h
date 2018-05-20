@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 13:49:56 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 19:54:48 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/19 23:31:03 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 # define CLIENT_H
 
-#include <sys/types.h>
-#define MAX_NAME 9
+# include <sys/types.h>
+# define MAX_NAME 9
 # define DEFAULT_COLOR 424242
 
 typedef struct s_client		t_client;

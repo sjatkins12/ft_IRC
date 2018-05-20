@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:45:00 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 18:26:24 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 01:32:56 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 #include "client_obj.h"
 #include "client_funcs.h"
 
-t_client	g_client_tab[FD_SETSIZE];
+t_client		g_client_tab[FD_SETSIZE];
 
-t_client_funcs g_client_funcs[] = {
-	{"NICK ", &nickname},
-	{"PASS ", &pass},
-	{"JOIN ", &join},
-	{"COLOR ", &color},
-	{NULL, NULL}
+t_client_funcs	g_client_funcs[] = {
+				{"NICK ", &nickname},
+				{"PASS ", &pass},
+				{"JOIN ", &join},
+				{"COLOR ", &color},
+				{"WHO\0", &who},
+				{NULL, NULL}
 };
 
 static int		check_registered(int client_index, char *msg)
@@ -44,7 +45,7 @@ static int		check_registered(int client_index, char *msg)
 	return (EXIT_SUCCESS);
 }
 
-int	get_client_msg(int client_socket)
+int				get_client_msg(int client_socket)
 {
 	char	buff[1024];
 	int		i;

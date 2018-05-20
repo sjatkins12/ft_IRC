@@ -6,7 +6,7 @@
 #    By: satkins <satkins@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/25 14:05:53 by satkins           #+#    #+#              #
-#    Updated: 2018/05/19 18:27:30 by satkins          ###   ########.fr        #
+#    Updated: 2018/05/20 00:28:51 by satkins          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,9 @@ SRC_SERVER =  \
 			nickname \
 			send_channel_msg \
 			close_connection \
-			color
+			color \
+			join \
+			who
 
 SRC_CLIENT = \
 			connect_to_server \
@@ -48,7 +50,8 @@ SRC_COMMANDS = \
 			nick \
 			pass \
 			join \
-			color
+			color \
+			who
 
 SRC_UTILS = \
 			fd_set_utils \
