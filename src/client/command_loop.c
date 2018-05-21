@@ -6,18 +6,28 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:30:52 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 13:27:36 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 20:57:52 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_irc.h"
+#include "termcap_utils.h"
 
 t_client_prompt	g_prompt;
+
+int			undo_return(void)
+{
+	clear_prompt();
+	term_cm(0, 0);
+	scroll_r();
+	cursor_ll();
+	return (EXIT_SUCCESS);
+}
 
 int			send_msg_to_channel(int server_socket, char *command)
 {
 	clear_prompt();
-	if (send(server_socket, command, ft_strlen(command), 0) == -1)
+	if (send(server_socket, command, 1024, 0) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -33,6 +43,8 @@ static int	read_user_input(int server_socket)
 			return (EXIT_FAILURE);
 		if (command[0] == '/')
 			handle_command(server_socket, command);
+		else if (command[0] == '\0')
+			undo_return();
 		else if (g_prompt.channel_set && ft_strlen(command))
 			send_msg_to_channel(server_socket, command);
 		free(command);

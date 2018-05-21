@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 17:00:27 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 16:28:07 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 20:38:08 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,17 @@ void		ring_bell(void)
 
 	if (cache == NULL)
 		cache = tgetstr("bl", NULL);
+	set_raw_mode();
+	tputs(cache, 1, &my_putchar);
+	reset();
+}
+
+void			scroll_r(void)
+{
+	static char	*cache = NULL;
+
+	if (cache == NULL)
+		cache = tgetstr("sr", NULL);	
 	set_raw_mode();
 	tputs(cache, 1, &my_putchar);
 	reset();

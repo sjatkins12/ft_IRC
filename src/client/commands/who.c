@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/20 00:16:03 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 00:51:40 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 20:26:17 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	who(int server_socket, __attribute__((unused))char *param)
 
 	ft_bzero(buff, sizeof(buff));
 	ft_strcpy(buff, "WHO\0");
+	clear_prompt();
 	if (send(server_socket, buff, sizeof(buff), 0) == -1)
 		return (EXIT_FAILURE);
 	ft_bzero(buff, sizeof(buff));
