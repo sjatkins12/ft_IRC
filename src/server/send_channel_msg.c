@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 20:35:11 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 23:54:42 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 16:56:22 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,29 +18,31 @@
 
 t_channel	g_channel_tab[MAX_CHANNEL];
 
-
-
-// int	who(int	client_id, char *msg)
-// {
-	
-// }
-
-static int	send_to_client(int client_id, char *msg, t_client client)
+static int	add_header(char *buff, t_client client)
 {
-	char	buff[1024];
 	t_msg_header	header;
 	struct tm	*curr_time;
 	time_t		time_type;
 
-	ft_bzero(buff, sizeof(buff));
 	time_type = time(NULL);
 	curr_time = localtime(&time_type);
+	ft_bzero(header.msg_type, sizeof(header.msg_type));
+	ft_strcpy(header.msg_type, "MSG");
 	ft_bzero(header.nickname, sizeof(header.nickname));
 	ft_strcpy(header.nickname, client.vtable->get_nickname(client));
 	header.color = split_color(client.vtable->get_color(client));
 	header.hour = curr_time->tm_hour;
 	header.min = curr_time->tm_min;
 	ft_memcpy(buff, &(header), sizeof(t_msg_header));
+	return (EXIT_SUCCESS);
+}
+
+static int	send_to_client(int client_id, char *msg, t_client client)
+{
+	char	buff[1024];
+
+	ft_bzero(buff, sizeof(buff));
+	add_header(buff, client);
 	ft_strcpy(buff + sizeof(t_msg_header), msg);
 	if (send(client_id, buff, sizeof(buff), 0) == -1)
 		return (EXIT_FAILURE);

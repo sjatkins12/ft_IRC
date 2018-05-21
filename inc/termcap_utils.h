@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 17:08:55 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 14:51:56 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 16:28:17 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		scroll_f(void);
 void		clear_window(void);
 void		cursor_ll(void);
 void		term_cm(int y, int x);
+void		ring_bell(void);
 
 int			init_termcaps(void);
 

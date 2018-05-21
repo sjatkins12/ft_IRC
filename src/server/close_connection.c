@@ -6,13 +6,17 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 14:00:41 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/17 14:05:32 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 11:28:39 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_irc.h"
 #include "client_obj.h"
 #include "channel_obj.h"
+
+/*
+** Remove client any channel table it may be in.
+*/
 
 int	close_client(int client_socket)
 {

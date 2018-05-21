@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/18 10:27:12 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 00:50:11 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 16:48:57 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,35 @@
 #include "ft_irc.h"
 #include "msg.h"
 
-t_client_prompt	g_prompt;
 
-void		print_user(t_msg_header header)
-{
-	ft_printf("%s: %02d:%02d\n", header.nickname, header.hour, header.min);
-}
+t_msg_type_dis	g_msg_dis[] = {
+	{"MSG", &channel_msg},
+	// {"PRVMSG", &private_msg},
+	{"SERVMSG", &server_msg},
+	{"", NULL}
+};
 
 int			read_channel(int server_socket)
 {
 	char			buff[1024];
 	char			*msg;
 	t_msg_header	header;
+	int				i;
 
 	ft_bzero(buff, sizeof(buff));
 	msg = &(buff[sizeof(t_msg_header)]);
 	ft_bzero(&header, sizeof(t_msg_header));
 	recv(server_socket, buff, sizeof(buff), 0);
 	ft_memcpy(&header, buff, sizeof(t_msg_header));
-	if (ft_strncmp(g_prompt.nickname, header.nickname, ft_strlen(g_prompt.nickname)))
+	i = 0;
+	while (g_msg_dis[i].msg_type[0])
 	{
-		move_to_prompt(g_prompt.prompt_len);
-		save_cur();
-		delete_current_line();
-		print_user(header);
-		ft_printf("\033[38;2;%d;%d;%dm%s\n\033[0m", header.color.red, header.color.green, header.color.blue, msg);
-		print_prompt(g_prompt);
-		restore_cur();
-	}
-	else
-	{
-		delete_current_line();
-		print_user(header);		
-		ft_printf("\033[38;2;%d;%d;%dm%s\033[0m", header.color.red, header.color.green, header.color.blue, msg);
-		move_down_line();
-		print_prompt(g_prompt);
+		if (ft_strequ(g_msg_dis[i].msg_type, header.msg_type))
+			g_msg_dis[i].func(header, msg);
+		i++;
 	}
 	return (EXIT_SUCCESS);
+	
 }
 
 int			clear_prompt(void)

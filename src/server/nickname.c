@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 19:29:13 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/16 19:54:05 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 11:39:57 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 
 static int	check_nick(char *nickname)
 {
-	if (ft_strlen(nickname) > MAX_NAME)
+	size_t	len;
+
+	len = ft_strlen(nickname);
+	if (len > MAX_NAME || len == 0)
 		return (EXIT_FAILURE);
+	/* TODO: Add nickname collision */
 	return (EXIT_SUCCESS);
 }
 
@@ -28,7 +32,8 @@ int	set_nick(t_client client, char *nickname)
 		return (EXIT_FAILURE);
 	}
 	client.vtable->set_nickname(client, nickname);
-	send(client.client_id, "GOOD_NICK", 9, 0);
+	if (send(client.client_id, "NICK", 4, 0) == -1)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 

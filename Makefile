@@ -6,7 +6,7 @@
 #    By: satkins <satkins@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/25 14:05:53 by satkins           #+#    #+#              #
-#    Updated: 2018/05/20 00:28:51 by satkins          ###   ########.fr        #
+#    Updated: 2018/05/20 17:14:43 by satkins          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,13 +45,17 @@ SRC_CLIENT = \
 			command_loop \
 			prompt \
 			recv_channel_msg \
-			move_to_prompt
+			move_to_prompt \
+			main \
+			server_msg \
+			channel_msg
 SRC_COMMANDS = \
 			nick \
 			pass \
 			join \
 			color \
-			who
+			who \
+			handle_command
 
 SRC_UTILS = \
 			fd_set_utils \

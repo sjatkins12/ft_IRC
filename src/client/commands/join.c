@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 21:40:46 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 00:38:32 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 18:57:24 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	send_command(int server_socket, char *chan_name)
 	ft_bzero(buff, sizeof(buff));
 	ft_strcpy(buff, "JOIN ");
 	ft_strcat(buff, chan_name);
+	clear_prompt();
 	if (send(server_socket, buff, 1024, 0) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

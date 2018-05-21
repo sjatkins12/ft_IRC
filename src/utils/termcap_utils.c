@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 17:00:27 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 15:04:05 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 16:28:07 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,5 +137,16 @@ void		term_cm(int y, int x)
 		cache = tgetstr("cm", NULL);
 	set_raw_mode();
 	tputs(tgoto(cache, x, y), 1, &my_putchar);
+	reset();
+}
+
+void		ring_bell(void)
+{
+	static char	*cache = NULL;
+
+	if (cache == NULL)
+		cache = tgetstr("bl", NULL);
+	set_raw_mode();
+	tputs(cache, 1, &my_putchar);
 	reset();
 }

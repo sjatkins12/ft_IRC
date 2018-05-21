@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 14:37:57 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/17 17:47:48 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 12:38:48 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		pass(int client_socket, char *msg)
 		send(client_socket, "ERR_BADPASS", 13, 0);
 		return (EXIT_FAILURE);
 	}
-	if (send(client_socket, "GOOD_PASS", 9, 0) == -1)
+	if (send(client_socket, "PASS", 4, 0) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

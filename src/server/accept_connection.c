@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 12:14:30 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/17 14:01:10 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 11:24:29 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 #include "client_obj.h"
 
 t_client	g_client_tab[FD_SETSIZE];
+
+/*
+** Accept new client connections. Also create new client object
+*/
 
 int	accept_new_client(int master_fd, fd_set *cpy)
 {

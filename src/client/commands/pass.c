@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 13:20:17 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/18 11:05:03 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 12:39:00 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	send_pass(int server_socket, char *pass)
 	ft_bzero(buff, sizeof(buff));
 	if (recv(server_socket, buff, sizeof(buff), 0) == -1)
 		return (EXIT_FAILURE);
-	if (!ft_strequ(buff, "GOOD_PASS"))
+	if (!ft_strequ(buff, "PASS"))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:45:00 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 01:32:56 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 16:35:59 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@ t_client_funcs	g_client_funcs[] = {
 				{"WHO\0", &who},
 				{NULL, NULL}
 };
+
+/*
+** Recv from a client socket. Check the client has had a valid handshake.
+** Then check the message header and dispatch accordingly.
+*/
 
 static int		check_registered(int client_index, char *msg)
 {
@@ -47,8 +52,9 @@ static int		check_registered(int client_index, char *msg)
 
 int				get_client_msg(int client_socket)
 {
-	char	buff[1024];
-	int		i;
+	t_client_funcs	tuple;
+	char			buff[1024];
+	int				i;
 
 	ft_bzero(buff, sizeof(buff));
 	recv(client_socket, buff, sizeof(buff), 0);
@@ -57,8 +63,8 @@ int				get_client_msg(int client_socket)
 	i = 0;
 	while (g_client_funcs[i].command)
 	{
-		if (ft_strnequ(g_client_funcs[i].command, buff,
-			ft_strlen(g_client_funcs[i].command)))
+		tuple = g_client_funcs[i];
+		if (ft_strnequ(tuple.command, buff, ft_strlen(tuple.command)))
 		{
 			g_client_funcs[i].func(client_socket, buff);
 			return (EXIT_SUCCESS);

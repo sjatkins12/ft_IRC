@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 14:53:29 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/17 15:40:00 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 15:39:39 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static int	send_command(int server_socket, char *nick)
 	ft_bzero(buff, sizeof(buff));
 	ft_strcpy(buff, "NICK ");
 	ft_strcat(buff, nick);
+	clear_prompt();
 	if (send(server_socket, buff, sizeof(buff), 0) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -46,7 +47,7 @@ static int	recv_response(int server_socket, char *nick)
 	ft_bzero(buff, sizeof(buff));
 	if (recv(server_socket, buff, sizeof(buff), 0) == -1)
 		return (EXIT_FAILURE);
-	if (!ft_strequ(buff, "GOOD_NICK"))
+	if (!ft_strequ(buff, "NICK"))
 	{
 		if (ft_strequ(buff, "ERR_NICKTOOLONG"))
 			prompt_nick(server_socket);
@@ -55,6 +56,10 @@ static int	recv_response(int server_socket, char *nick)
 	}
 	else
 	{
+		if (g_prompt.nickname[0])
+			ft_printf("%s NOW %s\n", g_prompt.nickname, nick);
+		else
+			ft_printf("Nickname: %s\n", nick);
 		ft_bzero(g_prompt.nickname, sizeof(g_prompt.nickname));
 		ft_strcpy(g_prompt.nickname, nick);
 	}

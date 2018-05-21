@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 11:59:33 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 16:21:55 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 17:13:24 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct				s_client_prompt
 	char					channel[30];
 	int						channel_set;
 	int						prompt_len;
-	t_color					self_color;
 }							t_client_prompt;
 
 /*
@@ -70,14 +69,16 @@ int							close_client(int client_socket);
 ** CLIENT FUNCTIONS
 */
 
-int				create_client_sock(int port, char *host);
-int				prompt_pass(int server_socket);
-t_client_prompt	init_prompt(void);
-int				print_prompt(t_client_prompt prompt);
-int				read_channel(int server_socket);
-int				clear_prompt(void);
-int				move_to_prompt(int prompt_len);
-int				set_prompt_color(int color_num);
+int							create_client_sock(int port, char *host);
+int							prompt_pass(int server_socket);
+t_client_prompt				init_prompt(void);
+int							print_prompt(t_client_prompt prompt);
+int							read_channel(int server_socket);
+int							clear_prompt(void);
+int							move_to_prompt(int prompt_len);
+int							handle_command(int server_socket, char *command);
+int							connect_to_server(int port, char *host);
+
 
 
 void						echo_off(void);

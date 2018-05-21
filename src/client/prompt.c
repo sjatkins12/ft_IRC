@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 22:12:45 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/19 18:27:07 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 13:15:19 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_client_prompt	init_prompt(void)
 	ft_strcpy(prompt.nickname, getenv("USER"));
 	prompt.channel_set = 0;
 	prompt.prompt_len = print_prompt(prompt);
-	prompt.self_color = split_color(DEFAULT_COLOR);
 	return (prompt);
 }
 
