@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:45:00 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 16:35:59 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:21:34 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_client_funcs	g_client_funcs[] = {
 				{"JOIN ", &join},
 				{"COLOR ", &color},
 				{"WHO\0", &who},
+				{"CHAN ", &get_channels},
 				{NULL, NULL}
 };
 
@@ -37,15 +38,16 @@ static int		check_registered(int client_index, char *msg)
 		if (ft_strncmp(msg, "PASS ", 5))
 		{
 			send(client_index, "ERR_NOTREGISTERED", 17, 0);
-			return (EXIT_SUCCESS);
+			return (-1);
 		}
 	}
 	else if (!((g_client_tab[client_index]).vtable->
 		get_nickname(g_client_tab[client_index]))
-		&& ft_strncmp(msg, "NICK ", 5))
+		&& !ft_strnequ(msg, "NICK ", 5)
+		&& !ft_strnequ(msg, "CHAN ", 5))
 	{
 		send(client_index, "ERR_NONICKSET", 13, 0);	
-		return (EXIT_SUCCESS);
+		return (-1);
 	}
 	return (EXIT_SUCCESS);
 }

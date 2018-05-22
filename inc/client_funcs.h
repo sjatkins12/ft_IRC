@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 19:43:10 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 00:13:31 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/21 14:29:14 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int				pass(int client_socket, char *msg);
 int				join(int client_id, char *msg);
 int 			color(int client_socket, char *msg);
 int				who(int	client_id, char *msg);
+int				get_channels(int client_id, char *msg);
 
 #endif

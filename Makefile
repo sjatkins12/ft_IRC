@@ -6,7 +6,7 @@
 #    By: satkins <satkins@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/07/25 14:05:53 by satkins           #+#    #+#              #
-#    Updated: 2018/05/20 17:14:43 by satkins          ###   ########.fr        #
+#    Updated: 2018/05/22 13:46:57 by satkins          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_SERVER =  \
 			close_connection \
 			color \
 			join \
-			who
+			who \
+			get_channels
 
 SRC_CLIENT = \
 			connect_to_server \
@@ -55,7 +56,8 @@ SRC_COMMANDS = \
 			join \
 			color \
 			who \
-			handle_command
+			handle_command \
+			get_channels
 
 SRC_UTILS = \
 			fd_set_utils \

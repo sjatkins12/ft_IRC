@@ -6,24 +6,20 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 14:53:29 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 15:39:39 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/22 14:05:16 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_irc.h"
 #include "client_commands.h"
 
-static int	prompt_nick(int server_socket)
+static int	prompt_nick(char *buff)
 {
-	char	*nick;
-
-	ft_printf("NICKNAME MUST BE LESS THAN %d CHARS\n", MAX_NAME + 1);
-	ft_printf("<RE-ENTER NICKNAME ...> ");
-	nick = NULL;
-	if (get_next_line(STDIN_FILENO, &nick) < 0)	
-		return (EXIT_FAILURE);
-	send_nick(server_socket, nick);
-	free(nick);
+	ft_printf("Bad Nickname. Use \"/nick <nickname>\" to change it.\n");
+	if (ft_strequ(buff, "ERR_NICKTOOLONG"))
+		ft_printf(RED "NICKNAME MUST BE LESS THAN %d CHARS\n" RES, MAX_NAME + 1);
+	else if (ft_strequ(buff, "ERR_NICKCOLLISION"))
+		ft_printf(RED "NICKNAME IS IN USE\n" RES);
 	return (EXIT_SUCCESS);
 }
 
@@ -49,20 +45,15 @@ static int	recv_response(int server_socket, char *nick)
 		return (EXIT_FAILURE);
 	if (!ft_strequ(buff, "NICK"))
 	{
-		if (ft_strequ(buff, "ERR_NICKTOOLONG"))
-			prompt_nick(server_socket);
-		else
-			return (EXIT_FAILURE);
+		prompt_nick(buff);
+		return (EXIT_SUCCESS);
 	}
+	if (g_prompt.nickname[0])
+		ft_printf("%s NOW %s\n", g_prompt.nickname, nick);
 	else
-	{
-		if (g_prompt.nickname[0])
-			ft_printf("%s NOW %s\n", g_prompt.nickname, nick);
-		else
-			ft_printf("Nickname: %s\n", nick);
-		ft_bzero(g_prompt.nickname, sizeof(g_prompt.nickname));
-		ft_strcpy(g_prompt.nickname, nick);
-	}
+		ft_printf("Nickname: %s\n", nick);
+	ft_bzero(g_prompt.nickname, sizeof(g_prompt.nickname));
+	ft_strcpy(g_prompt.nickname, nick);
 	return (EXIT_SUCCESS);
 }
 

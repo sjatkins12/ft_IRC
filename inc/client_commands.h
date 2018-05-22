@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 21:32:37 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 00:15:07 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/21 14:23:05 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int					send_nick(int server_socket, char *nick);
 int					join(int server_socket, char *param);
 int					color(int server_socket, char *param);
 int					who(int server_socket, char *param);
+int					get_channels(int server_socket, char *param);
 
 #endif

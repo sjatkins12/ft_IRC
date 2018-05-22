@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/16 21:40:46 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 18:57:24 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:01:15 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	recv_response(int server_socket, char *chan_name)
 		g_prompt.channel_set = 1;
 	}
 	else
-		ft_printf("\033[1;31mFailed to join %s\n\033[0m", chan_name);
+		ft_printf("\033[1;31mFailed to join %s\n%s\n\033[0m", chan_name, buff);
 	return (EXIT_SUCCESS);
 }
 

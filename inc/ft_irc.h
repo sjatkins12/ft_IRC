@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 11:59:33 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 17:13:24 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 21:04:45 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int							clear_prompt(void);
 int							move_to_prompt(int prompt_len);
 int							handle_command(int server_socket, char *command);
 int							connect_to_server(int port, char *host);
+int							undo_return(void);
 
 
 

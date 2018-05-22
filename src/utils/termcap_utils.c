@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 17:00:27 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 20:59:28 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:34:17 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void		cursor_ll(void)
 {
 	static char	*cache = NULL;
 
+	get_window_size();
 	if (cache == NULL)
 		cache = tgetstr("cm", NULL);
 	set_raw_mode();

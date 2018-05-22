@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 23:55:15 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 00:30:30 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:07:14 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,15 @@ static int	add_to_list(int client_id, char *buff)
 	return (EXIT_SUCCESS);
 }
 
-static int	send_list(int client_sock, uint8_t *members)
+static int	send_list(int client_sock, uint8_t *members, t_channel chan)
 {
-	char buff[1024];
+	char	buff[1024];
 	int		i;
 
 	ft_bzero(buff, sizeof(buff));
-	ft_strcpy(buff, "WHO ");
+	ft_strcpy(buff, "WHO Members of ");
+	ft_strcat(buff, chan.vtab->get_channel_name(chan));
+	ft_strcat(buff, ":\n");
 	i = 0;
 	while (i < FD_SETSIZE)
 	{
@@ -75,7 +77,7 @@ int	who(int	client_id, __attribute__((unused))char *msg)
 		return (EXIT_SUCCESS);
 	}
 	chan_members = chan.vtab->get_channel_members(chan);
-	if (send_list(client_id, chan_members) == EXIT_FAILURE)
+	if (send_list(client_id, chan_members, chan) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

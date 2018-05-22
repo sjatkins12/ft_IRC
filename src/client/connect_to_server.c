@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/14 15:41:59 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 13:35:07 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/22 15:19:31 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	register_connection(int server_socket)
 	if (prompt_pass(server_socket) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (send_nick(server_socket, getenv("USER")) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	if (get_channels(server_socket, NULL) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

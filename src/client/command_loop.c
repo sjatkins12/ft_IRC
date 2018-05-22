@@ -6,7 +6,7 @@
 /*   By: satkins <satkins@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/15 15:30:52 by satkins           #+#    #+#             */
-/*   Updated: 2018/05/20 20:57:52 by satkins          ###   ########.fr       */
+/*   Updated: 2018/05/20 21:07:41 by satkins          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,12 @@ int			undo_return(void)
 
 int			send_msg_to_channel(int server_socket, char *command)
 {
+	size_t	len;
+
+	if ((len = ft_strlen(command)) > 1024)
+		len = 1024;
 	clear_prompt();
-	if (send(server_socket, command, 1024, 0) == -1)
+	if (send(server_socket, command, len, 0) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -43,9 +47,9 @@ static int	read_user_input(int server_socket)
 			return (EXIT_FAILURE);
 		if (command[0] == '/')
 			handle_command(server_socket, command);
-		else if (command[0] == '\0')
+		else if (!ft_strlen(command) || !g_prompt.channel_set)
 			undo_return();
-		else if (g_prompt.channel_set && ft_strlen(command))
+		else
 			send_msg_to_channel(server_socket, command);
 		free(command);
 		g_prompt.prompt_len = print_prompt(g_prompt);
