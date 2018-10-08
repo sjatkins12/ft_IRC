@@ -1,6 +1,6 @@
 *.o
 ._*
-.vscode
+.vscode/
 .nfs*
 client
 server
